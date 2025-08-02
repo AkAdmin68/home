@@ -1,4 +1,5 @@
-import type { Route } from "./+types/home";
+
+import type { Route } from "../+types/root";
 import { Welcome } from "../welcome/welcome";
 
 export function meta({}: Route.MetaArgs) {
@@ -9,7 +10,5 @@ export function meta({}: Route.MetaArgs) {
 }
 
 export default function Home() {
-  return <div className="flex-1 flex flex-col items-center justify-center">
-    Hello world
-  </div>;
+  return <Welcome />;
 }
