@@ -15,7 +15,6 @@
   "dependencies": {
     "@react-spring/parallax": "^10.0.3",
     "@react-spring/web": "^10.0.3",
-    "@smakss/react-scroll-direction": "^4.2.0",
     "@tailwindcss/vite": "^4.1.13",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",

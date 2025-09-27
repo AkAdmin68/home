@@ -1,9 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { Parallax, ParallaxLayer, type IParallax } from '@react-spring/parallax'
-import useDetectScroll, {
-  Axis,
-  Direction
-} from '@smakss/react-scroll-direction';
 
 // Little helpers ...
 // const url = (name: string, wrap = false) =>
@@ -12,56 +8,45 @@ import useDetectScroll, {
 export default function ParallaxDemo() {
   const parallax = useRef<IParallax>(null!)
   const [customElement, setCustomElement] = useState<HTMLDivElement>();
-  const { scrollDir } = useDetectScroll({ axis: Axis.Y, target: customElement });
   const [pageNo, setPageNo] = useState(0);
+  const [deltaY, setDeltaY] = useState(0);
 
   useEffect(() => {
     const timer = setTimeout(() => {
       if(parallax.current) {
-          setCustomElement(parallax.current.container.current);
+          const container = parallax.current?.container.current as HTMLDivElement
+          setCustomElement(container);
+
+          container.onwheel = (e) => {
+            e.preventDefault();
+            setDeltaY(e.deltaY);
+        }
       }
     }, 0);
-    return () => clearTimeout(timer);
-  }, [])
-
-  // useEffect(() => {
-  //   const interval = setInterval(() => {
-  //     if (parallax.current) {
-  //       const nextPage = (Math.floor(parallax.current.offset) + 1) % 3;
-  //       parallax.current.scrollTo(nextPage);
-  //     }
-  //   }, 2000);
-  //   return () => clearInterval(interval);
-  // })
+    return () => { clearTimeout(timer); if (customElement) customElement.onwheel = null };
+  }, [parallax.current])
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      switch (scrollDir) {
-        case Direction.Down: {
-          // console.log("down", Math.ceil(parallax.current.current / parallax.current.space))
-          const nextPage = Math.ceil(parallax.current.current / parallax.current.space)
-          if (nextPage !== pageNo) {
-            setPageNo(nextPage);
-            parallax.current.scrollTo(nextPage);
-          }
-          break;
+      if (deltaY > 5) {
+        const nextPage = Math.min(pageNo + 1, 6)
+        if (nextPage !== pageNo) {
+          setPageNo(nextPage);
+          parallax.current.scrollTo(nextPage);
         }
-        case Direction.Up: {
-          // console.log("up", Math.ceil(parallax.current.current / parallax.current.space))
-          const previousPage = Math.floor(parallax.current.current / parallax.current.space)
-          if (previousPage !== pageNo) {
-            setPageNo(previousPage);
-            parallax.current.scrollTo(previousPage);
-          }
-          break;
+      } else if (deltaY < -5) {
+        const previousPage = Math.max(pageNo - 1, 0)
+        if (previousPage !== pageNo) {
+          setPageNo(previousPage);
+          parallax.current.scrollTo(previousPage);
         }
       }
     }, 50);
     return () => clearTimeout(timer);
-  }, [parallax.current?.current]);
+  }, [deltaY])
 
   return (
-    <Parallax ref={parallax} pages={7} style={{ position: "relative", height: '100%' }}>
+    <Parallax config={{  }} ref={parallax} pages={7} style={{ position: "relative", height: '100%' }}>
 
         <ParallaxLayer offset={0}  style={{ backgroundColor: '#509b5aff'}} />
         <ParallaxLayer offset={1}  style={{ backgroundColor: '#805E73'}} />
