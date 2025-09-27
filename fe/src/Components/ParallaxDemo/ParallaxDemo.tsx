@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useRef } from 'react'
 import { Parallax, ParallaxLayer, type IParallax } from '@react-spring/parallax'
 
 // Little helpers ...
