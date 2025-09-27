@@ -48,15 +48,15 @@ export default function ParallaxDemo() {
   return (
     <Parallax config={{  }} ref={parallax} pages={7} style={{ position: "relative", height: '100%' }}>
 
-        <ParallaxLayer offset={0}  style={{ backgroundColor: '#509b5aff'}} />
-        <ParallaxLayer offset={1}  style={{ backgroundColor: '#805E73'}} />
-        <ParallaxLayer offset={2}  style={{ backgroundColor: '#87BCDE'}} />
+        <ParallaxLayer offset={0}  style={{ backgroundImage: 'linear-gradient(to bottom, #509b5aff, #805E73)' }} />
+        <ParallaxLayer offset={1}  style={{ backgroundImage: 'linear-gradient(to bottom, #805E73, #87BCDE)' }} />
+        <ParallaxLayer offset={2}  style={{ backgroundImage: 'linear-gradient(to bottom, #87BCDE, #509b5aff)' }} />
         
-        <ParallaxLayer offset={3}  style={{ backgroundColor: '#509b5aff'}} />
-        <ParallaxLayer offset={4}  style={{ backgroundColor: '#805E73'}} />
-        <ParallaxLayer offset={5}  style={{ backgroundColor: '#87BCDE'}} />
+        <ParallaxLayer offset={3}  style={{ backgroundImage: 'linear-gradient(to bottom, #509b5aff, #805E73)' }} />
+        <ParallaxLayer offset={4}  style={{ backgroundImage: 'linear-gradient(to bottom, #805E73, #87BCDE)' }} />
+        <ParallaxLayer offset={5}  style={{ backgroundImage: 'linear-gradient(to bottom, #87BCDE, #509b5aff)' }} />
         
-        <ParallaxLayer offset={6}  style={{ backgroundColor: '#509b5aff'}} />
+        <ParallaxLayer offset={6}  style={{ backgroundImage: 'linear-gradient(to bottom, #509b5aff, #805E73)' }} />
 
       </Parallax>
   )
