@@ -7,43 +7,43 @@ import { Parallax, ParallaxLayer, type IParallax } from '@react-spring/parallax'
 
 export default function ParallaxDemo() {
   const parallax = useRef<IParallax>(null!)
-  const [customElement, setCustomElement] = useState<HTMLDivElement>();
-  const [pageNo, setPageNo] = useState(0);
-  const [deltaY, setDeltaY] = useState(0);
+  // const [customElement, setCustomElement] = useState<HTMLDivElement>();
+  // const [pageNo, setPageNo] = useState(0);
+  // const [deltaY, setDeltaY] = useState(0);
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      if(parallax.current) {
-          const container = parallax.current?.container.current as HTMLDivElement
-          setCustomElement(container);
+  // useEffect(() => {
+  //   const timer = setTimeout(() => {
+  //     if(parallax.current) {
+  //         const container = parallax.current?.container.current as HTMLDivElement
+  //         setCustomElement(container);
 
-          container.onwheel = (e) => {
-            e.preventDefault();
-            setDeltaY(e.deltaY);
-        }
-      }
-    }, 0);
-    return () => { clearTimeout(timer); if (customElement) customElement.onwheel = null };
-  }, [parallax.current])
+  //         container.onwheel = (e) => {
+  //           e.preventDefault();
+  //           setDeltaY(e.deltaY);
+  //       }
+  //     }
+  //   }, 0);
+  //   return () => { clearTimeout(timer); if (customElement) customElement.onwheel = null };
+  // }, [parallax.current])
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      if (deltaY > 5) {
-        const nextPage = Math.min(pageNo + 1, 6)
-        if (nextPage !== pageNo) {
-          setPageNo(nextPage);
-          parallax.current.scrollTo(nextPage);
-        }
-      } else if (deltaY < -5) {
-        const previousPage = Math.max(pageNo - 1, 0)
-        if (previousPage !== pageNo) {
-          setPageNo(previousPage);
-          parallax.current.scrollTo(previousPage);
-        }
-      }
-    }, 50);
-    return () => clearTimeout(timer);
-  }, [deltaY])
+  // useEffect(() => {
+  //   const timer = setTimeout(() => {
+  //     if (deltaY > 5) {
+  //       const nextPage = Math.min(pageNo + 1, 6)
+  //       if (nextPage !== pageNo) {
+  //         setPageNo(nextPage);
+  //         parallax.current.scrollTo(nextPage);
+  //       }
+  //     } else if (deltaY < -5) {
+  //       const previousPage = Math.max(pageNo - 1, 0)
+  //       if (previousPage !== pageNo) {
+  //         setPageNo(previousPage);
+  //         parallax.current.scrollTo(previousPage);
+  //       }
+  //     }
+  //   }, 50);
+  //   return () => clearTimeout(timer);
+  // }, [deltaY])
 
   return (
     <Parallax config={{  }} ref={parallax} pages={7} style={{ position: "relative", height: '100%' }}>
