@@ -124,4 +124,4 @@ export default function ParallaxDemo() {
           >
           <img src={url('clients-main')} style={{ width: '40%' }} />
         </ParallaxLayer>
-    </div> */
+    </div> */}
